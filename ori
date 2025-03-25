@@ -1,0 +1,29 @@
+import streamlit as st
+
+def is_prime(num):
+    if num > 1:
+        for i in range(2, int(num**0.5) + 1):
+            if num % i == 0:
+                return False
+        return True
+    return False
+
+# Streamlit 앱 작성
+st.title("소수 계산 앱")
+
+st.header("활동 1: 1부터 50까지의 소수 출력")
+if st.button("1부터 50까지 소수 출력"):
+    primes = [num for num in range(2, 51) if is_prime(num)]
+    st.write("소수 목록:", primes)
+
+st.header("활동 2: 입력한 범위 내의 소수 출력")
+start = st.number_input("시작 범위", value=1, step=1)
+end = st.number_input("끝 범위", value=50, step=1)
+if st.button("입력한 범위 내의 소수 출력"):
+    primes = [num for num in range(int(start), int(end) + 1) if is_prime(num)]
+    st.write("소수 목록:", primes)
+
+st.header("활동 3: 입력한 범위 내의 소수 개수 출력")
+if st.button("입력한 범위 내의 소수 개수 계산"):
+    count = sum(1 for num in range(int(start), int(end) + 1) if is_prime(num))
+    st.write(f"소수의 개수: {count}")
